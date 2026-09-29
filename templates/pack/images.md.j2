@@ -1,0 +1,16 @@
+# Imagens — {{ data.series_title }} · {{ data.episode_id }}
+Salvar em `assets/images/`.
+Gere na ordem abaixo.
+
+{% for item in data.images %}## IMAGEM {{ item.number }} de {{ data.images|length }}
+
+O que é: {{ item.shot.expected_result_pt or item.shot.beat_pt }}
+Anexar: {{ item.attachment }}
+Salvar como: `{{ item.filename }}`
+Status: {{ item.status }}
+
+```text
+{{ item.prompt }}
+```
+
+{% endfor %}

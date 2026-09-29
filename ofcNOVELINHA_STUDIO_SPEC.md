@@ -780,6 +780,8 @@ studio prompts \<series\> \<ep\> \--phase images|videos
 
 studio session \<series\> \<ep\> \[--account conta1\]   \# folha de sessão: ordem, anexos e prompts
 
+studio pack \<series\> \<ep\>       \# pacote simples com roteiro, imagens e vídeos
+
 studio next \<series\> \<ep\>            \# diz qual é a próxima ação e mostra o prompt pronto
 
 studio plan \<series\> \<ep\>            \# créditos de vídeo e divisão por conta
@@ -892,17 +894,28 @@ Todos os comandos devem funcionar offline, imprimir saída legível no terminal 
 por conta/dia respeitando reservas, gera `plan-day`, cria folhas de sessão offline e faz `next`
 respeitar a reserva. Não inclui métricas nem publicação.
 
-**Fase 3 — Status e arquivos**
+**Fase 3 — Pacote simples**
+
+- `studio pack <series> <episode>` gera `pacote/1_ROTEIRO.md`, `pacote/2_IMAGENS.md` e
+  `pacote/3_VIDEOS.md`, com linguagem natural, prompts prontos e ordem de produção.
+- A aprovação no pacote depende somente de arquivos com o nome esperado dentro de
+  `assets/images/` e `assets/videos/`; `status` no YAML e arquivos em Downloads são ignorados.
+- Imagens são ordenadas topologicamente; vídeos seguem a ordem narrativa. O pacote não inclui
+  contas, créditos ou a sessão detalhada. Custo `null` não bloqueia o pacote.
+- `validate` com ERROR impede a geração. Reexecutar sobrescreve somente `pacote/` e nunca move,
+  renomeia ou apaga assets. Esta fase permanece offline e não implementa métricas ou publicação.
+
+**Fase 4 — Status e arquivos**
 
 - `studio mark`, `studio attempt`, `studio status`, `studio check-names`.  
 - Painel de status por episódio e por plano, com duração estimada.
 
-**Fase 4 — Publicação**
+**Fase 5 — Publicação**
 
 - `studio caption` (legenda, hashtags, sugestão de capa, lembretes de política).  
 - Registro de métricas em `episode.yaml`.
 
-**Fase 5 — Multi-estilo e conveniência**
+**Fase 6 — Multi-estilo e conveniência**
 
 - Presets `fruit_humans` e outro à escolha completos.  
 - `studio style new` interativo.  
@@ -985,6 +998,11 @@ Leia \`docs/SPEC.md\` antes de qualquer tarefa.
 \- Sem regressão nas validações da seção 7.4 da SPEC.
 
 ## 16\. ESTADO ATUAL DO PROJETO (ATUALIZAR A CADA FASE)
+
+- Fase concluída: **Fase 3 — Pacote simples**. A autoria pode terminar com `validate` → `lint` →
+  `pack`; o resultado é uma pasta pequena para copiar prompts no Flow. Aprovação é verificada no
+  filesystem de assets, sem depender do status do YAML. As fases de status, métricas e publicação
+  continuam fora desta implementação.
 
 - Fase concluída: **Fase 2 — Créditos, contas e sessão**. Créditos vêm exclusivamente do config;
   custos `null` bloqueiam o cálculo, a alocação cobre o pior caso de tentativas e a sessão é

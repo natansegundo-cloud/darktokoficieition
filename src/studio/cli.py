@@ -13,6 +13,7 @@ from .config import load_goals, load_production, set_active_profile, show_first_
 from .credits import build_day_plan, build_episode_plan, plan_summary, plan_table
 from .loader import ProjectLoader
 from .pacing import lint_bundle, pacing_table
+from .pack import PackValidationError, build_pack, write_pack
 from .prompts import validate_bundle, write_prompts
 from .scaffold import init_project, new_episode, new_series, new_style
 from .session import write_session_sheet
@@ -384,6 +385,31 @@ def session(
     if warning := production.costs_warning():
         typer.echo(f"WARNING: {warning}")
     typer.echo(f"Session sheet written to {target}")
+
+
+@app.command("pack")
+def pack(series_id: str, episode_id: str) -> None:
+    """Generate the three simple copy-ready production documents."""
+    loader = ProjectLoader(_root())
+    try:
+        bundle = loader.load_episode_bundle(series_id, episode_id)
+        data = build_pack(_root(), bundle)
+        target = write_pack(_root(), bundle, data=data)
+    except PackValidationError as exc:
+        for issue in exc.issues:
+            prefix = issue.level.upper()
+            suffix = f" [{issue.shot_id}]" if issue.shot_id else ""
+            typer.echo(f"{prefix}{suffix}: {issue.message}")
+        typer.echo("ERROR: pacote não gerado; corrija os erros de validate e tente novamente.")
+        raise typer.Exit(code=1) from exc
+    except Exception as exc:
+        typer.echo(f"ERROR: pack: {exc}")
+        raise typer.Exit(code=1) from exc
+    for issue in data.issues:
+        if issue.level == "warning":
+            suffix = f" [{issue.shot_id}]" if issue.shot_id else ""
+            typer.echo(f"WARNING{suffix}: {issue.message}")
+    typer.echo(f"Pacote gerado em {target}")
 
 
 @app.command()

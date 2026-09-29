@@ -20,6 +20,7 @@ studio next revenge_republic ep01
 studio plan revenge_republic ep01
 studio plan-day --episodes 1
 studio session revenge_republic ep01 --account conta1
+studio pack revenge_republic ep01
 ```
 
 O projeto usa a pasta atual como raiz. Dados ficam em YAML/Markdown e mídia fica fora do Git.
@@ -126,8 +127,24 @@ nunca faz login nem automatiza o Flow. Custos `null` bloqueiam cálculos; custos
 aviso. O aviso de termos de uso da primeira execução fica em `.studio_state.json`, ignorado pelo
 Git. Esta fase não implementa métricas nem publicação.
 
+## Fase 3 — Pacote simples
+
+Depois de preencher e revisar o episódio, o fluxo curto é:
+
+```text
+studio validate <series> <episode>
+studio lint <series> <episode>
+studio pack <series> <episode>
+```
+
+O `pack` gera somente `pacote/1_ROTEIRO.md`, `pacote/2_IMAGENS.md` e
+`pacote/3_VIDEOS.md`. Ele também cria `assets/images/` e `assets/videos/`; o usuário move os
+arquivos aprovados para essas pastas. A aprovação do pacote depende exclusivamente do arquivo
+existir com o nome esperado, não do `status` no YAML. O pacote não mostra contas, créditos ou
+sessão. Se `validate` tiver ERROR, nada é gerado.
+
 ## Fase 1
 
 Esta primeira implementação cobre estrutura, modelos, criação de séries e episódios, validação
 geração de prompts e acompanhamento visual da produção. Créditos/alocação, sessão completa,
-tentativas avançadas e publicação ficam para fases posteriores.
+tentativas avançadas, métricas e publicação ficam para fases posteriores.

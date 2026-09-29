@@ -7,6 +7,9 @@
   bloqueia o planejamento para evitar estimativas inventadas.
 - `studio plan` deve ser conferido antes dos vídeos e `studio session` organiza imagens, anexos e
   vídeos por conta sem fazer login ou chamadas externas.
+- O pacote simples trata o YAML como plano e o filesystem como aprovação: somente o arquivo com
+  nome esperado dentro de `assets/images/` ou `assets/videos/` marca um plano como aprovado.
+  Downloads externos e `status` não contam.
 
 - Todo clipe carrega fala ou voz off; silêncio só como golpe, no máximo 1 por episódio.
 - Um beat abstrato não basta para o modo econômico: cada vídeo precisa de estado inicial,

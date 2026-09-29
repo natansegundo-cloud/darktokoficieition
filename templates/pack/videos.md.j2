@@ -1,0 +1,18 @@
+# Vídeos — {{ data.series_title }} · {{ data.episode_id }}
+Salvar em `assets/videos/`.
+Só gere o vídeo depois que a imagem estiver aprovada.
+
+{% for item in data.videos %}## VÍDEO {{ item.number }} de {{ data.videos|length }}
+
+O que acontece: {{ item.shot.expected_result_pt or item.shot.beat_pt }}
+Anexar: {{ item.attachment }}
+{% if item.pending_warning %}{{ item.pending_warning }}
+{% endif %}Duração: {{ item.shot.duration_s }}s
+Salvar como: `{{ item.filename }}`
+Status: {{ item.status }}
+
+```text
+{{ item.prompt }}
+```
+
+{% endfor %}

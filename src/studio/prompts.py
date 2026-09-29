@@ -19,7 +19,7 @@ class PromptResult:
     prompt_pt: str
     markdown: str
     reference: str
-    cost: int
+    cost: int | None
     issues: list[ValidationIssue]
 
 
@@ -296,7 +296,13 @@ def validate_bundle(bundle: LoadedEpisode) -> list[ValidationIssue]:
     return issues
 
 
-def render_prompt(root: Path, bundle: LoadedEpisode, shot: Shot) -> PromptResult:
+def render_prompt(
+    root: Path,
+    bundle: LoadedEpisode,
+    shot: Shot,
+    *,
+    allow_unknown_cost: bool = False,
+) -> PromptResult:
     issues = validate_shot(bundle, shot)
     characters = _character_map(bundle)
     locations = {location.id: location for location in bundle.locations.locations}
@@ -310,7 +316,12 @@ def render_prompt(root: Path, bundle: LoadedEpisode, shot: Shot) -> PromptResult
         bundle.series.profile, bundle.episode.profile
     )
     profile = production.profile(profile_name)
-    cost = production.shot_credits(shot, resolution=profile.resolution)
+    try:
+        cost = production.shot_credits(shot, resolution=profile.resolution)
+    except ValueError:
+        if not allow_unknown_cost:
+            raise
+        cost = None
     environment = _template_environment(root)
     selected = [characters[item] for item in shot.characters if item in characters]
     light = shot.light or location.default_light

@@ -38,6 +38,10 @@
  `shots.yaml` seguindo `docs/AUTHORING_GUIDE.md`. Depois deve rodar `studio validate` e
  `studio lint`, corrigindo os arquivos até não haver erros.
 
- A regra de não fazer chamadas de rede vale para o código do Studio: a CLI continua offline e
- não automatiza geração de mídia, contas ou navegador. A autoria é feita pelo agente, que lê e
- escreve os arquivos versionados no repositório.
+A regra de não fazer chamadas de rede vale para o código do Studio: a CLI continua offline e
+não automatiza geração de mídia, contas ou navegador. A autoria é feita pelo agente, que lê e
+escreve os arquivos versionados no repositório.
+
+O último passo do Modo Autoria é: rodar `validate`, depois `lint`, corrigir até zerar os erros,
+rodar `studio pack <serie> <ep>`, e responder somente com o caminho da pasta `pacote/` e um
+resumo de três linhas.
