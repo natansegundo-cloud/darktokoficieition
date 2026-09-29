@@ -80,6 +80,10 @@ lock; `hair_color` ajuda a detectar confusão no mesmo plano. `silhouette_hook` 
 do personagem. `default_delivery` e `default_delivery_pt` definem um único tom de voz para falas
 que não especificarem delivery. `voice_notes`, `bio_pt`, `arc_pt` e `approved_reference`
 completam a ficha; `voice_notes` é nota de autoria e nunca entra no prompt.
+Para cada personagem falante, preencha `voice_profile` e `voice_profile_pt` com idade aparente,
+gênero, registro, timbre, ritmo e sotaque. O perfil deve ser um único som consistente; o prompt
+de vídeo usa o perfil apenas quando o personagem fala naquele plano. O preset também define
+`audio_style`/`audio_style_pt` para manter diálogo e ambiente coerentes.
 
 ## Personagem estranho que se mantém consistente
 

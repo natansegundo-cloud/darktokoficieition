@@ -1,0 +1,7 @@
+locations:
+  - id: apartment_living_kitchen
+    name: "Sala e cozinha integradas do apartamento"
+    description_en: "single integrated student apartment living room and kitchen, compact sofa, narrow counter, open shelves, lilac phone on the counter"
+    description_pt: "sala e cozinha integradas de um apartamento estudantil, sofá compacto, balcão estreito, prateleiras abertas e celular lilás sobre o balcão"
+    default_light: "daylight that shifts to warm late afternoon and cool night practicals"
+    default_light_pt: "luz do dia que muda para fim de tarde quente e luz prática fria à noite"

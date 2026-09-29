@@ -9,5 +9,7 @@ camera_defaults_pt: "enquadramento fechado e estável com aproximações lentas,
 video_motion_defaults: "exaggerated but readable facial acting, slow deliberate body motion, minimal background motion"
 video_motion_defaults_pt: "atuação facial exagerada mas legível, movimento corporal lento e deliberado, movimento mínimo no fundo"
 character_rules: "Each main character has ONE absurdly distinctive silhouette element (haircut, nose, jaw or eyebrows) that stays identical in every shot; keep head-to-body proportions constant."
+audio_style: "clean dialogue in Brazilian Portuguese, natural room tone, no background music, no laugh track, no on-screen text"
+audio_style_pt: "áudio limpo em português do Brasil, som natural do ambiente, sem música de fundo, sem risadas de fundo, sem texto na tela"
 character_rules_pt: "Cada personagem principal tem UM elemento de silhueta absurdamente distinto (corte de cabelo, nariz, queixo ou sobrancelhas) que permanece idêntico em todos os planos; mantenha constantes as proporções entre cabeça e corpo."
 notes: "Estilizado esconde falhas da IA melhor que realismo em 360p. Estranheza vem da silhueta, não de detalhe fino."

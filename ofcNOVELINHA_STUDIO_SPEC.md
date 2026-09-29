@@ -896,14 +896,23 @@ respeitar a reserva. Não inclui métricas nem publicação.
 
 **Fase 3 — Pacote simples**
 
-- `studio pack <series> <episode>` gera `pacote/1_ROTEIRO.md`, `pacote/2_IMAGENS.md` e
-  `pacote/3_VIDEOS.md`, com linguagem natural, prompts prontos e ordem de produção.
+- `studio pack <series> <episode>` gera `pacote/0_PERSONAGENS.md`, `pacote/1_ROTEIRO.md`,
+  `pacote/2_IMAGENS.md` e `pacote/3_VIDEOS.md`, com linguagem natural, prompts prontos e ordem
+  de produção. O primeiro documento prepara rosto e corpo dos personagens que aparecem no episódio.
 - A aprovação no pacote depende somente de arquivos com o nome esperado dentro de
   `assets/images/` e `assets/videos/`; `status` no YAML e arquivos em Downloads são ignorados.
 - Imagens são ordenadas topologicamente; vídeos seguem a ordem narrativa. O pacote não inclui
   contas, créditos ou a sessão detalhada. Custo `null` não bloqueia o pacote.
 - `validate` com ERROR impede a geração. Reexecutar sobrescreve somente `pacote/` e nunca move,
   renomeia ou apaga assets. Esta fase permanece offline e não implementa métricas ou publicação.
+
+**Extensão da Fase 3 — consistência de personagens e áudio**
+
+- Personagens falantes aceitam `voice_profile`/`voice_profile_pt`; os prompts listam somente as
+  vozes que falam no plano e repetem `audio_style`/`audio_style_pt` do preset.
+- A pasta `series/<id>/assets/characters/` aprova rosto e corpo apenas por arquivo de imagem com
+  nome esperado. Imagens de cena podem anexar esses assets; vídeos anexam somente a imagem da
+  cena. `voice_notes` permanece nota de autoria e nunca entra no prompt.
 
 **Fase 4 — Status e arquivos**
 
@@ -1019,16 +1028,17 @@ Leia \`docs/SPEC.md\` antes de qualquer tarefa.
 - Qualidade: o perfil `growth` usa 360p e o perfil `monetize` usa 1080p; custos de 1080p ainda
   precisam ser conferidos na interface do Flow.
 - A série `revenge_republic` é somente fixture funcional de testes, está com `status: paused` e
-  não será publicada. A série real ainda não existe.
-- O estilo da série real será estilizado e estranho: caricatura 3D com proporções exageradas,
+  não será publicada. A série oficial `amiga_de_mentira` está em planejamento com o episódio 1
+  autorado.
+- O estilo da série oficial é estilizado e estranho: caricatura 3D com proporções exageradas,
   não realista.
 - A estratégia aprovada tem duas etapas: CRESCIMENTO com vídeos curtos e baratos até a
   qualificação; MONETIZAÇÃO com episódios acima de 60 s e resolução 1080p.
 - Perfil ativo: `growth`, com episódios de 20 a 45 segundos e cold open configurado.
-- Fase de desenvolvimento do Studio: **Fases 1.9 e 1.10 concluídas**. O Studio agora tem o
-  preset `weird_toon`, lint de silhueta/termos bloqueados e a bíblia verificável, além do controle
-  de ritmo, runtime, perfis e resolução. A série real ainda não foi criada; Fases 2+ continuam
-  não implementadas.
+- Fase de desenvolvimento do Studio: **Fases 1.9, 1.10 e extensão do pacote concluídas**. O
+  Studio tem preset `weird_toon`, lint de silhueta/termos bloqueados, bíblia verificável, perfis,
+  ritmo, pacote de personagens e perfis de voz. A série oficial `amiga_de_mentira` foi criada
+  em planejamento com o episódio 1 autorado; métricas e publicação continuam fora do escopo.
 
 ## 17\. LIÇÕES INICIAIS (COPIAR PARA `docs/LESSONS.md`)
 

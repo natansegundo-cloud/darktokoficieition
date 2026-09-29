@@ -36,19 +36,21 @@ def _bundle(root: Path):
     return ProjectLoader(root).load_episode_bundle("revenge_republic", "ep01")
 
 
-def test_pack_creates_three_documents_and_asset_folders(tmp_path: Path) -> None:
+def test_pack_creates_four_documents_and_asset_folders(tmp_path: Path) -> None:
     root = _copy_project(tmp_path)
     _make_images(root)
 
     package = write_pack(root, _bundle(root))
 
     assert sorted(path.name for path in package.iterdir()) == [
+        "0_PERSONAGENS.md",
         "1_ROTEIRO.md",
         "2_IMAGENS.md",
         "3_VIDEOS.md",
     ]
     assert (package.parent / "assets" / "images").exists()
     assert (package.parent / "assets" / "videos").exists()
+    assert (root / "series" / "revenge_republic" / "assets" / "characters").exists()
     script = (package / "1_ROTEIRO.md").read_text(encoding="utf-8")
     assert "00:00–00:08" in script
     assert "Duda revela ao telefone" in script

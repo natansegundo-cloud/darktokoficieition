@@ -3,7 +3,7 @@ from pathlib import Path
 
 from studio.loader import ProjectLoader
 from studio.models import DialogueLine
-from studio.prompts import render_prompt, validate_bundle
+from studio.prompts import render_character_prompt, render_prompt, validate_bundle
 
 ROOT = Path(__file__).parents[1]
 
@@ -131,5 +131,18 @@ def test_video_prompt_contains_timed_direction_and_constraints() -> None:
     assert "Scene setup:" in result.prompt
     assert "At 0-2s:" in result.prompt
     assert "Do not:" in result.prompt
+    assert bundle.style.audio_style in result.prompt
+    assert "Voices (keep identical in every clip)" in result.prompt
+    assert "low, cold, controlled" in result.prompt
     assert "Direção por tempo:" in result.prompt_pt
     assert "Não fazer:" in result.prompt_pt
+
+
+def test_character_face_and_body_prompts_are_available() -> None:
+    bundle = ProjectLoader(ROOT).load_episode_bundle("revenge_republic", "ep01")
+    character = bundle.characters.characters[0]
+    face = render_character_prompt(ROOT, bundle, character, "face")
+    body = render_character_prompt(ROOT, bundle, character, "body")
+    assert "head-and-shoulders" in face.prompt
+    assert character.lock_block in body.prompt
+    assert "vertical 9:16" not in body.prompt

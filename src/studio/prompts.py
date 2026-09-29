@@ -23,6 +23,14 @@ class PromptResult:
     issues: list[ValidationIssue]
 
 
+@dataclass(frozen=True)
+class CharacterPromptResult:
+    character: Character
+    kind: str
+    prompt: str
+    prompt_pt: str
+
+
 def _template_environment(root: Path) -> Environment:
     return Environment(
         loader=FileSystemLoader(root / "templates" / "prompts"),
@@ -121,6 +129,21 @@ def _voice_over_context(
             }
         )
     return result
+
+
+def _speaking_voices(
+    shot: Shot, characters: dict[str, Character]
+) -> list[dict[str, str]]:
+    speaking_ids = {line.speaker for line in [*shot.dialogue_pt, *shot.voice_over_pt]}
+    return [
+        {
+            "speaker_name": character.name,
+            "voice_profile": character.voice_profile or "[missing voice_profile]",
+            "voice_profile_pt": character.voice_profile_pt or "[falta perfil de voz]",
+        }
+        for character in (characters[item] for item in shot.characters if item in characters)
+        if character.id in speaking_ids
+    ]
 
 
 def _pt_value(value: str, field: str) -> str:
@@ -340,6 +363,8 @@ def render_prompt(
         "style": bundle.style,
         "dialogue": _dialogue_context(shot.dialogue_pt, characters),
         "voice_over": _voice_over_context(shot.voice_over_pt, characters),
+        "voices": _speaking_voices(shot, characters),
+        "audio_style": bundle.style.audio_style,
         "reference_names": (
             ", ".join(character.name for character in selected) if shot.reference_from else ""
         ),
@@ -381,6 +406,7 @@ def render_prompt(
                 bundle.style.video_motion_defaults_pt, "video_motion_defaults"
             ),
             "character_rules": _pt_value(bundle.style.character_rules_pt, "character_rules"),
+            "audio_style": _pt_value(bundle.style.audio_style_pt, "audio_style"),
         },
     }
     context.update(_direction_context(shot))
@@ -448,6 +474,33 @@ def render_prompt(
         cost=cost,
         issues=issues,
     )
+
+
+def render_character_prompt(
+    root: Path, bundle: LoadedEpisode, character: Character, kind: str
+) -> CharacterPromptResult:
+    if kind not in {"face", "body"}:
+        raise ValueError("kind de personagem deve ser 'face' ou 'body'")
+    environment = _template_environment(root)
+    style_block = bundle.style.style_block
+    style_block_pt = bundle.style.style_block_pt
+    if kind == "body":
+        style_block = re.sub(r"\s*,?\s*vertical 9:16", "", style_block, flags=re.IGNORECASE)
+        style_block_pt = re.sub(
+            r"\s*,?\s*(?:formato )?vertical 9:16", "", style_block_pt, flags=re.IGNORECASE
+        )
+    context = {
+        "character": character,
+        "style_block": style_block,
+        "style_block_pt": style_block_pt or _pt_value(bundle.style.style_block_pt, "style_block"),
+        "negative_hints": bundle.style.negative_hints,
+        "negative_hints_pt": _pt_value(bundle.style.negative_hints_pt, "negative_hints"),
+    }
+    prompt = " ".join(environment.get_template(f"character_{kind}.j2").render(**context).split())
+    prompt_pt = " ".join(
+        environment.get_template(f"character_{kind}_pt.j2").render(**context).split()
+    )
+    return CharacterPromptResult(character=character, kind=kind, prompt=prompt, prompt_pt=prompt_pt)
 
 
 def _scene_key(shot_id: str, shots: dict[str, Shot]) -> str:

@@ -166,6 +166,54 @@ def _character_visual_issues(bundle: LoadedEpisode, shot: Shot) -> list[Validati
     return issues
 
 
+def _voice_issues(bundle: LoadedEpisode, shot: Shot) -> list[ValidationIssue]:
+    characters = {character.id: character for character in bundle.characters.characters}
+    speaking_ids = {line.speaker for line in [*shot.dialogue_pt, *shot.voice_over_pt]}
+    issues: list[ValidationIssue] = []
+    profiles: dict[str, str] = {}
+    for character_id in speaking_ids:
+        character = characters.get(character_id)
+        if not character:
+            continue
+        if not character.voice_profile:
+            issues.append(
+                _issue(
+                    "warning",
+                    f"Personagem falante {character.id} não tem voice_profile",
+                    shot.id,
+                )
+            )
+        if character.voice_profile and not character.voice_profile_pt:
+            issues.append(
+                _issue(
+                    "warning",
+                    f"Missing Portuguese mirror: voice_profile_pt de {character.id}",
+                    shot.id,
+                )
+            )
+        if character.voice_profile_pt and not character.voice_profile:
+            issues.append(
+                _issue(
+                    "warning",
+                    f"Missing English mirror: voice_profile de {character.id}",
+                    shot.id,
+                )
+            )
+        if character.voice_profile:
+            folded = character.voice_profile.casefold().strip()
+            if folded in profiles:
+                issues.append(
+                    _issue(
+                        "warning",
+                        f"Perfis de voz duplicados no plano: {profiles[folded]} e {character_id}",
+                        shot.id,
+                    )
+                )
+            else:
+                profiles[folded] = character_id
+    return issues
+
+
 def _safety_issues(bundle: LoadedEpisode, blocked_terms: list[str]) -> list[ValidationIssue]:
     issues: list[ValidationIssue] = []
 
@@ -232,6 +280,7 @@ def _missing_pt_issues(bundle: LoadedEpisode, shot: Shot) -> list[ValidationIssu
         (style.camera_defaults, style.camera_defaults_pt, "camera_defaults"),
         (style.video_motion_defaults, style.video_motion_defaults_pt, "video_motion_defaults"),
         (style.character_rules, style.character_rules_pt, "character_rules"),
+        (style.audio_style, style.audio_style_pt, "audio_style"),
     ):
         check(english, portuguese, field)
     return issues
@@ -370,6 +419,7 @@ def lint_bundle(bundle: LoadedEpisode, production: ProductionConfig) -> PacingRe
         previous_beat = shot.beat_pt.strip()
 
         issues.extend(_missing_pt_issues(bundle, shot))
+        issues.extend(_voice_issues(bundle, shot))
         if not is_video:
             continue
 

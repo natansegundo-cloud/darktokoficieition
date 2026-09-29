@@ -174,6 +174,35 @@ def test_delivery_forbidden_markers_are_configurable() -> None:
     assert any("tom duplo" in message for message in _messages(report, "error"))
 
 
+def test_voice_profile_missing_mirror_and_duplicate_are_warnings() -> None:
+    bundle = _bundle_with(
+        _video(
+            dialogue_pt=[
+                DialogueLine(speaker="duda", text="Vai"),
+                DialogueLine(speaker="manu", text="Agora"),
+            ]
+        )
+    )
+    updated = [
+        item.model_copy(update={"voice_profile": "same voice"})
+        if item.id == "duda"
+        else item
+        for item in bundle.characters.characters
+    ]
+    updated = [
+        item.model_copy(update={"voice_profile": "same voice", "voice_profile_pt": None})
+        if item.id == "manu"
+        else item
+        for item in updated
+    ]
+    report = lint_bundle(
+        replace(bundle, characters=CharactersFile(characters=updated)), ProductionConfig()
+    )
+    warnings = _messages(report, "warning")
+    assert any("voice_profile_pt" in message for message in warnings)
+    assert any("duplicados" in message for message in warnings)
+
+
 def test_runtime_is_reported_and_warns_outside_ten_percent() -> None:
     bundle = _bundle_with(_video(duration_s=8), _video("P100", order=1, duration_s=8))
     bundle = replace(

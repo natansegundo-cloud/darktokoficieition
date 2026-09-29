@@ -10,9 +10,9 @@ from jinja2 import Environment, FileSystemLoader, StrictUndefined
 from .bible import check_bible, has_bible_errors
 from .config import load_production
 from .loader import LoadedEpisode
-from .models import Shot, ValidationIssue
+from .models import Character, Shot, ValidationIssue
 from .pacing import VIDEO_KINDS, lint_bundle
-from .prompts import PromptResult, render_prompt, validate_bundle
+from .prompts import PromptResult, render_character_prompt, render_prompt, validate_bundle
 
 IMAGE_KINDS = {"anchor_image", "derived_image"}
 IMAGE_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp"}
@@ -57,6 +57,25 @@ class PackVideo:
 
 
 @dataclass(frozen=True)
+class PackCharacter:
+    character: Character
+    face_filename: str
+    body_filename: str
+    face_approved: bool
+    body_approved: bool
+    face_prompt: str
+    body_prompt: str
+
+    @property
+    def face_status(self) -> str:
+        return "aprovado" if self.face_approved else "pendente"
+
+    @property
+    def body_status(self) -> str:
+        return "aprovado" if self.body_approved else "pendente"
+
+
+@dataclass(frozen=True)
 class PackData:
     series_title: str
     series_id: str
@@ -68,6 +87,7 @@ class PackData:
     target_seconds: int
     cold_open: object
     scenes: list[dict[str, object]]
+    characters: list[PackCharacter]
     images: list[PackImage]
     videos: list[PackVideo]
     montage_files: list[dict[str, str]]
@@ -106,6 +126,30 @@ def _asset_name(bundle: LoadedEpisode, shot: Shot, media_type: str) -> str:
         return found.name
     extension = ".jpg" if media_type == "image" else ".mp4"
     return expected_stem(bundle.episode.id, shot.id, media_type) + extension
+
+
+def _character_asset_directory(bundle: LoadedEpisode) -> Path:
+    return bundle.series_dir / "assets" / "characters"
+
+
+def _character_asset(bundle: LoadedEpisode, character: Character, kind: str) -> Path | None:
+    directory = _character_asset_directory(bundle)
+    if not directory.exists():
+        return None
+    stem = f"{character.id}_{kind}".casefold()
+    candidates = [
+        path
+        for path in directory.iterdir()
+        if path.is_file()
+        and path.suffix.casefold() in IMAGE_EXTENSIONS
+        and path.stem.casefold() == stem
+    ]
+    return sorted(candidates, key=lambda path: path.name.casefold())[0] if candidates else None
+
+
+def _character_asset_name(bundle: LoadedEpisode, character: Character, kind: str) -> str:
+    found = _character_asset(bundle, character, kind)
+    return found.name if found else f"{character.id}_{kind}.jpg"
 
 
 def _dependency(shot: Shot) -> str | None:
@@ -202,17 +246,58 @@ def build_pack(root: Path, bundle: LoadedEpisode) -> PackData:
     ordered = sorted(bundle.shots.shots, key=lambda shot: shot.order)
     image_shots = _ordered_images(ordered)
     image_numbers = {shot.id: index for index, shot in enumerate(image_shots, start=1)}
-    images = [
-        PackImage(
-            number=index,
-            shot=shot,
-            filename=_asset_name(bundle, shot, "image"),
-            approved=_find_asset(bundle, shot, "image") is not None,
-            attachment=_image_reference(bundle, shot, image_numbers),
-            prompt=_prompt_for(root, bundle, shot).prompt,
+    appearing_ids = {
+        character_id
+        for shot in ordered
+        for character_id in shot.characters
+    }
+    pack_characters: list[PackCharacter] = []
+    for character in bundle.characters.characters:
+        if character.id not in appearing_ids:
+            continue
+        face_prompt = render_character_prompt(root, bundle, character, "face")
+        body_prompt = render_character_prompt(root, bundle, character, "body")
+        pack_characters.append(
+            PackCharacter(
+                character=character,
+                face_filename=_character_asset_name(bundle, character, "face"),
+                body_filename=_character_asset_name(bundle, character, "body"),
+                face_approved=_character_asset(bundle, character, "face") is not None,
+                body_approved=_character_asset(bundle, character, "body") is not None,
+                face_prompt=face_prompt.prompt,
+                body_prompt=body_prompt.prompt,
+            )
         )
-        for index, shot in enumerate(image_shots, start=1)
-    ]
+    pack_character_by_id = {item.character.id: item for item in pack_characters}
+    images: list[PackImage] = []
+    for index, shot in enumerate(image_shots, start=1):
+        attachment_parts = [_image_reference(bundle, shot, image_numbers)]
+        missing_characters = []
+        for character_id in shot.characters:
+            character = pack_character_by_id.get(character_id)
+            if not character:
+                continue
+            attachment_parts.append(
+                f"personagem {character.character.name}: rosto {character.face_filename} "
+                f"({character.face_status}), corpo {character.body_filename} "
+                f"({character.body_status})"
+            )
+            if not character.face_approved or not character.body_approved:
+                missing_characters.append(character.character.name)
+        if missing_characters:
+            attachment_parts.append(
+                "⚠️ Assets de personagem pendentes: " + ", ".join(missing_characters)
+            )
+        images.append(
+            PackImage(
+                number=index,
+                shot=shot,
+                filename=_asset_name(bundle, shot, "image"),
+                approved=_find_asset(bundle, shot, "image") is not None,
+                attachment="; ".join(attachment_parts),
+                prompt=_prompt_for(root, bundle, shot).prompt,
+            )
+        )
 
     video_shots = [shot for shot in ordered if shot.kind in VIDEO_KINDS]
     videos: list[PackVideo] = []
@@ -289,6 +374,7 @@ def build_pack(root: Path, bundle: LoadedEpisode) -> PackData:
         target_seconds=bundle.episode.target_seconds,
         cold_open=bundle.episode.cold_open if bundle.episode.cold_open.enabled else None,
         scenes=scenes,
+        characters=pack_characters,
         images=images,
         videos=videos,
         montage_files=montage_files,
@@ -312,6 +398,7 @@ def write_pack(root: Path, bundle: LoadedEpisode, data: PackData | None = None) 
     episode_dir = bundle.episode_dir
     (episode_dir / "assets" / "images").mkdir(parents=True, exist_ok=True)
     (episode_dir / "assets" / "videos").mkdir(parents=True, exist_ok=True)
+    _character_asset_directory(bundle).mkdir(parents=True, exist_ok=True)
     package_dir = episode_dir / "pacote"
     if package_dir.exists():
         shutil.rmtree(package_dir)
@@ -319,6 +406,7 @@ def write_pack(root: Path, bundle: LoadedEpisode, data: PackData | None = None) 
     environment = _environment(root)
     common = {"data": data}
     for filename, template_name in (
+        ("0_PERSONAGENS.md", "characters.md.j2"),
         ("1_ROTEIRO.md", "script.md.j2"),
         ("2_IMAGENS.md", "images.md.j2"),
         ("3_VIDEOS.md", "videos.md.j2"),

@@ -73,14 +73,17 @@ O lint também valida o tom de voz: `delivery` em inglês e `delivery_pt` em por
 usa seu próprio delivery; na ausência dele, usa o `default_delivery` do personagem. `voice_notes`
 fica apenas como nota de autoria e nunca entra no prompt. A tabela Rich mostra o runtime estimado,
 comparado à meta do episódio, e o comando retorna erro quando a severidade configurada exigir.
+Cada personagem que fala deve ter `voice_profile` e `voice_profile_pt`. O prompt de vídeo lista
+somente as vozes dos personagens falantes e aplica o `audio_style` do preset.
 
 Para vídeos, os prompts agora carregam direção por tempo: contexto, estado inicial, ações em
 ordem, estado final, som e restrições. Escreva o que a câmera deve ver, não apenas a intenção
 dramática.
 
 `series/revenge_republic` é uma fixture funcional de testes, está pausada e não é material de
-publicação. A série real ainda não foi criada. A estratégia aprovada separa CRESCIMENTO, com
-vídeos curtos e baratos, de MONETIZAÇÃO, com episódios acima de 60 segundos em 1080p.
+publicação. A série oficial `amiga_de_mentira` está em planejamento com o episódio 1 autorado.
+A estratégia aprovada separa CRESCIMENTO, com vídeos curtos e baratos, de MONETIZAÇÃO, com
+episódios acima de 60 segundos em 1080p.
 
 ## Fase 1.7 — Endurecimento de ritmo e fala
 
@@ -137,11 +140,15 @@ studio lint <series> <episode>
 studio pack <series> <episode>
 ```
 
-O `pack` gera somente `pacote/1_ROTEIRO.md`, `pacote/2_IMAGENS.md` e
-`pacote/3_VIDEOS.md`. Ele também cria `assets/images/` e `assets/videos/`; o usuário move os
-arquivos aprovados para essas pastas. A aprovação do pacote depende exclusivamente do arquivo
+O `pack` gera `pacote/0_PERSONAGENS.md`, `pacote/1_ROTEIRO.md`, `pacote/2_IMAGENS.md` e
+`pacote/3_VIDEOS.md`. O primeiro documento gera rosto e corpo dos personagens que aparecem no
+episódio; os arquivos aprovados ficam em `series/<id>/assets/characters/`. Ele também cria
+`assets/images/` e `assets/videos/`; o usuário move os arquivos aprovados para essas pastas. A aprovação depende exclusivamente do arquivo
 existir com o nome esperado, não do `status` no YAML. O pacote não mostra contas, créditos ou
 sessão. Se `validate` tiver ERROR, nada é gerado.
+
+O fluxo oficial atual está em `series/amiga_de_mentira`: oito episódios planejados, perfil `growth`,
+estilo `weird_toon` e episódio 1 pronto para revisar com `studio validate`, `studio lint` e `studio pack`.
 
 ## Fase 1
 

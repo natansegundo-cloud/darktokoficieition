@@ -11,6 +11,14 @@ Cartela: {{ data.cold_open.title_card_pt }}
 Transição: {{ data.cold_open.transition }}
 {% endif %}
 
+## Elenco e vozes
+
+{% for item in data.characters %}### {{ item.character.name }}
+
+{{ item.character.bio_pt or item.character.lock_block_pt or item.character.lock_block }}
+Perfil de voz: {{ item.character.voice_profile_pt or "não definido" }}
+{% endfor %}
+
 ## Cenas
 
 {% for scene in data.scenes %}### {{ scene.time_range }}

@@ -1,5 +1,10 @@
 # Lessons
 
+- Um pacote de produção só fica consistente quando rosto e corpo aprovados são preparados antes das
+  imagens de cena; vídeos usam apenas a imagem da cena como anexo e repetem o perfil de voz.
+- A série oficial `amiga_de_mentira` começa em `planning`; `revenge_republic` segue exclusivamente
+  como fixture pausada de testes e não deve ser publicada.
+
 - A capacidade por conta usa `floor(créditos_diários / custo_do_clipe) - reserva`; o planejamento
   calcula uma tentativa esperada e o pior caso configurado. Contas são apelidos manuais, nunca
   acessadas pela ferramenta.

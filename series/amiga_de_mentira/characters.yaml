@@ -1,0 +1,73 @@
+characters:
+  - id: bia
+    name: Bia
+    full_name: Beatriz
+    role: protagonist
+    age: 21
+    lock_version: 1
+    lock_block: "Bia, 21-year-old Brazilian woman, medium-brown skin, dark brown hair in one enormous perfectly spherical bun high on her head, brown eyes, mustard-yellow cardigan over a cream T-shirt"
+    lock_block_pt: "Bia, mulher brasileira de 21 anos, pele marrom média, cabelo castanho-escuro em um enorme coque perfeitamente esférico no alto da cabeça, olhos castanhos, cardigan amarelo-mostarda sobre camiseta creme"
+    silhouette_hook: "one enormous perfectly spherical bun high on her head"
+    silhouette_hook_pt: "um enorme coque perfeitamente esférico no alto da cabeça"
+    palette: "mustard-yellow cardigan, cream shirt, dark-brown hair, warm brown skin"
+    hair_color: dark-brown
+    default_delivery: "soft, slightly husky, anxious"
+    default_delivery_pt: "suave, levemente rouca, ansiosa"
+    voice_profile: "young adult woman, medium register, soft slightly husky timbre, fast rhythm when nervous, Brazilian Portuguese, natural São Paulo accent"
+    voice_profile_pt: "mulher adulta jovem, registro médio, timbre suave levemente rouco, ritmo rápido quando nervosa, português brasileiro, sotaque natural"
+    bio_pt: "Protagonista de 21 anos; quer provar que é inocente e preservar a única amizade que ainda considera real, mas esconde que já suspeita de Lari."
+    arc_pt: "Começa tentando pedir ajuda sem acusar ninguém; aprende a observar a prova e a confrontar a pessoa que mais confia."
+  - id: lari
+    name: Lari
+    full_name: Larissa
+    role: villain
+    age: 21
+    lock_version: 1
+    lock_block: "Lari, 21-year-old Brazilian woman, light skin, straight platinum-blonde hair, sharp triangular black eyebrows, lilac blouse, holding a lilac phone"
+    lock_block_pt: "Lari, mulher brasileira de 21 anos, pele clara, cabelo liso platinado, sobrancelhas pretas triangulares e afiadas, blusa lilás, segurando um celular lilás"
+    silhouette_hook: "sharp triangular black eyebrows"
+    silhouette_hook_pt: "sobrancelhas pretas triangulares e afiadas"
+    palette: "lilac blouse, platinum hair, lilac phone, cool pale skin"
+    hair_color: platinum-blonde
+    default_delivery: "honey-sweet, smooth, controlled"
+    default_delivery_pt: "doce como mel, lisa, controlada"
+    voice_profile: "young adult woman, slightly high register, honey-sweet smooth timbre, controlled rhythm, Brazilian Portuguese, natural São Paulo accent, identical timbre when whispering cold"
+    voice_profile_pt: "mulher adulta jovem, registro levemente alto, timbre doce como mel e liso, ritmo controlado, português brasileiro, mesmo timbre ao sussurrar com frieza"
+    bio_pt: "Amiga perfeita em público; quer a bolsa de intercâmbio que Bia ganhou e esconde que é dona da conta anônima."
+    arc_pt: "Mantém o controle pela gentileza até a própria prova visual escapar no celular lilás."
+  - id: caio
+    name: Caio
+    full_name: Caio
+    role: love_interest
+    age: 22
+    lock_version: 1
+    lock_block: "Caio, 22-year-old Brazilian man, medium-brown skin, huge geometric square jaw, short curly black hair, teal-green jacket over a white shirt"
+    lock_block_pt: "Caio, homem brasileiro de 22 anos, pele marrom média, queixo quadrado geométrico enorme, cabelo preto curto e cacheado, jaqueta verde-petróleo sobre camisa branca"
+    silhouette_hook: "huge geometric square jaw"
+    silhouette_hook_pt: "queixo quadrado geométrico enorme"
+    palette: "teal-green jacket, white shirt, black hair, medium-brown skin"
+    hair_color: black
+    default_delivery: "low, calm, contained"
+    default_delivery_pt: "baixo, calmo, contido"
+    voice_profile: "young adult man, low-medium register, calm contained timbre, slow measured rhythm, Brazilian Portuguese, natural São Paulo accent"
+    voice_profile_pt: "homem adulto jovem, registro médio-baixo, timbre calmo e contido, ritmo lento e medido, português brasileiro, sotaque natural"
+    bio_pt: "Namorado de Bia; quer acreditar nela, mas esconde que a dúvida já começou a mudar sua postura."
+    arc_pt: "Começa recuando diante do rumor e termina forçado a escolher entre a aparência da Lari e a evidência."
+  - id: tati
+    name: Tati
+    full_name: Tatiana
+    role: ally
+    age: 20
+    lock_version: 1
+    lock_block: "Tati, 20-year-old Brazilian woman, warm brown skin, one absurdly triangular orange nose, curly dark hair, orange jacket over a teal shirt"
+    lock_block_pt: "Tati, mulher brasileira de 20 anos, pele marrom quente, nariz laranja absurdamente triangular, cabelo escuro cacheado, jaqueta laranja sobre camiseta verde-petróleo"
+    silhouette_hook: "one absurdly triangular orange nose"
+    silhouette_hook_pt: "um nariz laranja absurdamente triangular"
+    palette: "orange jacket, teal shirt, dark hair, warm brown skin"
+    hair_color: dark
+    default_delivery: "energetic, bright, fast"
+    default_delivery_pt: "energética, brilhante, rápida"
+    voice_profile: "young adult woman, high-medium register, bright energetic timbre, fast rhythm, Brazilian Portuguese, natural São Paulo accent, expressive accent"
+    voice_profile_pt: "mulher adulta jovem, registro médio-alto, timbre energético e brilhante, ritmo rápido, português brasileiro, sotaque expressivo"
+    bio_pt: "Aliada que só entra na história no episódio 3; percebe padrões que os outros ignoram."
+    arc_pt: "Surge como testemunha inconveniente e se torna a primeira pessoa a conferir as pistas com Bia."

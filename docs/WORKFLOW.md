@@ -7,15 +7,20 @@ Flow. O Studio continua offline: ele não abre navegador, não faz login e não 
 2. Rode `studio validate <series> <episode>`.
 3. Rode `studio lint <series> <episode>` e corrija todos os erros.
 4. Rode `studio pack <series> <episode>`.
-5. Gere as imagens na ordem de `pacote/2_IMAGENS.md` e mova os resultados aprovados para
+5. Gere e aprove primeiro os rostos e corpos na ordem de `pacote/0_PERSONAGENS.md`; salve os
+   arquivos em `series/<id>/assets/characters/` com os nomes pedidos.
+6. Gere as imagens na ordem de `pacote/2_IMAGENS.md` e mova os resultados aprovados para
    `assets/images/` com o nome esperado.
-6. Gere os vídeos na ordem de `pacote/3_VIDEOS.md`, sempre anexando a imagem aprovada, e mova os
+7. Gere os vídeos na ordem de `pacote/3_VIDEOS.md`, sempre anexando somente a imagem da cena aprovada, e mova os
    resultados para `assets/videos/`.
-7. Rode `studio pack` novamente para atualizar os três documentos e os marcadores de aprovação.
+8. Rode `studio pack` novamente para atualizar os quatro documentos e os marcadores de aprovação.
 
 O comando `pack` nunca move, renomeia ou apaga arquivos em `assets/`. Ele sobrescreve somente a
 pasta `pacote/`. Um arquivo em Downloads não aprova um plano; o arquivo precisa estar na pasta
 de assets do episódio e ter o nome esperado, com uma extensão aceita.
+Para vídeos falados, o prompt lista `voice_profile` somente dos personagens que falam naquele plano
+e repete o `audio_style` do preset. O pacote de personagens deve ser aprovado antes das imagens;
+a imagem da cena continua sendo o único anexo dos vídeos.
 
 ## Modo avançado
 

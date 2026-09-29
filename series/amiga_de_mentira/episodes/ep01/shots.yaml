@@ -1,0 +1,330 @@
+shots:
+  - id: P01i
+    order: 0
+    kind: anchor_image
+    role: body
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: medium two-shot
+    framing_pt: plano médio de duas pessoas
+    action: "Bia grips a phone on the sofa while Lari sits close beside her"
+    action_pt: "Bia aperta um celular no sofá enquanto Lari se senta bem ao lado dela"
+    expected_result_pt: "Bia está em pânico no sofá e Lari oferece um abraço calmo; o ambiente integrado aparece atrás."
+    light: "daylight"
+    light_pt: "luz do dia"
+    resolution: 360p
+    beat_pt: "Bia percebe que o print falso já alcançou a universidade inteira."
+    status: approved
+    files:
+      image: assets/images/EP01_P01i_image.jpg
+  - id: P01
+    order: 1
+    kind: video_from_image
+    role: body
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: medium two-shot
+    framing_pt: plano médio de duas pessoas
+    action: "Bia speaks quickly in panic while Lari steadies her with a soft smile"
+    action_pt: "Bia fala rápido em pânico enquanto Lari a acalma com um sorriso suave"
+    expected_result_pt: "Bia tenta entender a dimensão do print e Lari promete descobrir o culpado, parecendo perfeita demais."
+    camera: "slow push-in toward Bia, then hold on Lari"
+    camera_pt: "aproximação lenta em Bia, depois a câmera segura em Lari"
+    gaze: "Bia looks at Lari; Lari looks at Bia"
+    gaze_pt: "Bia olha para Lari; Lari olha para Bia"
+    light: "daylight"
+    light_pt: "luz do dia"
+    resolution: 360p
+    beat_pt: "Lari oferece uma promessa doce que faz Bia confiar nela."
+    parent: P01i
+    dialogue_pt:
+      - speaker: bia
+        text: "Todo mundo já viu, Lari! Até o professor da turma!"
+        delivery: "shaky, fast, panicked"
+        delivery_pt: "trêmula, rápida, em pânico"
+      - speaker: lari
+        text: "Respira. Eu vou descobrir exatamente quem fez isso."
+        delivery: "honey-sweet, perfectly calm"
+        delivery_pt: "doce como mel, perfeitamente calma"
+    setup: "Bia and Lari sit close on the compact sofa; the phone with the fake screenshot stays in Bia's hands."
+    setup_pt: "Bia e Lari estão próximas no sofá compacto; o celular com o print falso permanece nas mãos de Bia."
+    start_state: "Bia trembles and looks from the phone to Lari; Lari's hand is already on Bia's shoulder."
+    start_state_pt: "Bia treme e olha do celular para Lari; a mão de Lari já está no ombro de Bia."
+    timeline:
+      - at_s: "0-2s"
+        action: "Bia looks at the phone and starts speaking before she can breathe."
+        action_pt: "Bia olha para o celular e começa a falar antes de conseguir respirar."
+      - at_s: "2-4s"
+        action: "Lari gently presses Bia's shoulder and keeps an immaculate smile."
+        action_pt: "Lari aperta gentilmente o ombro de Bia e mantém um sorriso impecável."
+      - at_s: "4-6s"
+        action: "Bia turns toward Lari, desperate for an answer."
+        action_pt: "Bia se vira para Lari, desesperada por uma resposta."
+      - at_s: "6-8s"
+        action: "Lari promises help while her triangular eyebrows stay unnaturally still."
+        action_pt: "Lari promete ajuda enquanto suas sobrancelhas triangulares ficam estranhamente imóveis."
+    timeline_pt:
+      - at_s: "0-2s"
+        action_pt: "Bia olha para o celular e começa a falar antes de conseguir respirar."
+      - at_s: "2-4s"
+        action_pt: "Lari aperta gentilmente o ombro de Bia e mantém um sorriso impecável."
+      - at_s: "4-6s"
+        action_pt: "Bia se vira para Lari, desesperada por uma resposta."
+      - at_s: "6-8s"
+        action_pt: "Lari promete ajuda enquanto suas sobrancelhas triangulares ficam estranhamente imóveis."
+    end_state: "Bia leans into Lari's comfort; Lari holds the perfect friend expression."
+    end_state_pt: "Bia se apoia no consolo de Lari; Lari sustenta a expressão de amiga perfeita."
+    sound: "quiet apartment room tone, phone vibration under the first line, clean dialogue"
+    sound_pt: "som baixo do apartamento, vibração do celular sob a primeira fala, diálogo limpo"
+    must_not: "Do not change clothes, faces, hair silhouettes or phone color; no extra characters, no text overlays, no cuts."
+    must_not_pt: "Não mudar roupas, rostos, silhuetas de cabelo ou cor do celular; sem personagens extras, texto sobreposto ou cortes."
+    duration_s: 8
+    status: todo
+  - id: P02i
+    order: 2
+    kind: derived_image
+    role: body
+    location: apartment_living_kitchen
+    characters: [bia, lari, caio]
+    framing: wide three-shot
+    framing_pt: plano aberto de três pessoas
+    action: "Caio stands near the counter while Bia sits on the sofa and Lari stands between them"
+    action_pt: "Caio fica perto do balcão enquanto Bia se senta no sofá e Lari permanece entre os dois"
+    expected_result_pt: "Caio entra no espaço integrado e encontra Bia sentada, Lari em pé e o celular lilás perto do balcão."
+    light: "late afternoon warm light"
+    light_pt: "luz quente do fim da tarde"
+    resolution: 360p
+    parent: P01i
+    beat_pt: "A dúvida de Caio entra no apartamento e muda a aliança da sala."
+    status: approved
+    files:
+      image: assets/images/EP01_P02i_image.jpg
+  - id: P02
+    order: 3
+    kind: video_from_image
+    role: body
+    location: apartment_living_kitchen
+    characters: [bia, lari, caio]
+    framing: wide three-shot
+    framing_pt: plano aberto de três pessoas
+    action: "Caio confronts Bia while Lari performs concern and hides a tiny smile"
+    action_pt: "Caio confronta Bia enquanto Lari representa preocupação e esconde um sorriso minúsculo"
+    expected_result_pt: "Caio repete o rumor; Lari defende Bia com doçura e, no fim, recua um passo escondendo um micro sorriso."
+    camera: "slow lateral move from Caio to Lari"
+    camera_pt: "movimento lateral lento de Caio até Lari"
+    gaze: "Caio looks at Bia, Lari lowers her eyes"
+    gaze_pt: "Caio olha para Bia, Lari baixa os olhos"
+    light: "late afternoon warm light"
+    light_pt: "luz quente do fim da tarde"
+    resolution: 360p
+    parent: P02i
+    beat_pt: "Lari transforma a defesa de Bia em uma pergunta que planta dúvida em Caio."
+    dialogue_pt:
+      - speaker: caio
+        text: "Todo mundo tá dizendo que foi você, Bia, agora."
+        delivery: "low, restrained, conflicted"
+        delivery_pt: "baixo, contido, dividido"
+      - speaker: lari
+        text: "Ela não faria isso... né? Eu juro, confia."
+        delivery: "soft, sweet, carefully uncertain"
+        delivery_pt: "suave, doce, cuidadosamente incerta"
+    setup: "Caio stands by the narrow counter, Bia sits rigidly on the sofa, and Lari occupies the space between them."
+    setup_pt: "Caio fica junto ao balcão estreito, Bia se senta rígida no sofá e Lari ocupa o espaço entre os dois."
+    start_state: "Caio keeps his arms close to his body; Bia looks up at him; Lari watches both faces."
+    start_state_pt: "Caio mantém os braços junto ao corpo; Bia olha para ele; Lari observa os dois rostos."
+    timeline:
+      - at_s: "0-2s"
+        action: "Caio says the rumor without sitting down, making the distance visible."
+        action_pt: "Caio diz o rumor sem se sentar, deixando a distância visível."
+      - at_s: "2-4s"
+        action: "Bia opens her mouth to answer, but Lari enters the silence first."
+        action_pt: "Bia abre a boca para responder, mas Lari entra primeiro no silêncio."
+      - at_s: "4-6s"
+        action: "Lari defends Bia with wet eyes and a perfectly measured smile."
+        action_pt: "Lari defende Bia com olhos úmidos e um sorriso perfeitamente medido."
+      - at_s: "6-8s"
+        action: "Caio steps back; Lari lowers her eyes and lets a micro-smile escape."
+        action_pt: "Caio recua; Lari baixa os olhos e deixa escapar um micro sorriso."
+    timeline_pt:
+      - at_s: "0-2s"
+        action_pt: "Caio diz o rumor sem se sentar, deixando a distância visível."
+      - at_s: "2-4s"
+        action_pt: "Bia abre a boca para responder, mas Lari entra primeiro no silêncio."
+      - at_s: "4-6s"
+        action_pt: "Lari defende Bia com olhos úmidos e um sorriso perfeitamente medido."
+      - at_s: "6-8s"
+        action_pt: "Caio recua; Lari baixa os olhos e deixa escapar um micro sorriso."
+    end_state: "Caio remains standing apart while Bia reaches for him and Lari looks innocent."
+    end_state_pt: "Caio permanece afastado enquanto Bia tenta alcançá-lo e Lari parece inocente."
+    sound: "late afternoon apartment tone, chair scrape at the step back, clean dialogue"
+    sound_pt: "som do apartamento no fim da tarde, arrastar de cadeira no recuo, diálogo limpo"
+    must_not: "Do not make Lari openly laugh, do not change the lilac phone, no extra people, no subtitles, no cuts."
+    must_not_pt: "Não fazer Lari rir abertamente, não mudar o celular lilás, sem pessoas extras, legendas ou cortes."
+    duration_s: 8
+    status: todo
+  - id: P03i
+    order: 4
+    kind: derived_image
+    role: hook
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: close over-the-shoulder
+    framing_pt: close sobre o ombro
+    gaze: "Lari looks over Bia's shoulder toward camera"
+    gaze_pt: "Lari olha por cima do ombro de Bia em direção à câmera"
+    action: "Lari hugs crying Bia while Lari's sharp eyebrows turn toward the camera over Bia's shoulder"
+    action_pt: "Lari abraça Bia chorando enquanto suas sobrancelhas afiadas se voltam para a câmera sobre o ombro de Bia"
+    expected_result_pt: "Lari abraça Bia, mas olha por cima do ombro dela com uma frieza que contradiz o abraço."
+    light: "cool evening practical light"
+    light_pt: "luz prática fria do começo da noite"
+    resolution: 360p
+    parent: P02i
+    beat_pt: "O abraço de Lari parece carinho para Bia e ameaça silenciosa para o público."
+    status: approved
+    files:
+      image: assets/images/EP01_P03i_image.jpg
+  - id: P03
+    order: 5
+    kind: video_from_image
+    role: hook
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: close over-the-shoulder
+    framing_pt: close sobre o ombro
+    action: "Lari hugs crying Bia, whispers a cruel secret to the camera, then performs comfort"
+    action_pt: "Lari abraça Bia chorando, sussurra um segredo cruel para a câmera e depois representa consolo"
+    expected_result_pt: "O plano começa com o sussurro frio de Lari antes de mostrar seu sorriso doce; Bia não percebe a ameaça."
+    camera: "slow push over Bia's shoulder toward Lari's triangular eyebrows"
+    camera_pt: "aproximação lenta sobre o ombro de Bia até as sobrancelhas triangulares de Lari"
+    gaze: "Lari looks directly into camera over Bia's shoulder"
+    gaze_pt: "Lari olha diretamente para a câmera sobre o ombro de Bia"
+    light: "cool evening practical light"
+    light_pt: "luz prática fria do começo da noite"
+    resolution: 360p
+    parent: P03i
+    beat_pt: "O público descobre que o consolo de Lari é uma encenação controlada."
+    dialogue_pt:
+      - speaker: lari
+        text: "Continua chorando... está perfeito, ninguém desconfia mesmo."
+        delivery: "low, cold, controlled whisper"
+        delivery_pt: "sussurro baixo, frio, controlado"
+      - speaker: lari
+        text: "Eu tô aqui, amiga. Sempre. Confia em mim, eu prometo."
+        delivery: "honey-sweet, warm, flawless"
+        delivery_pt: "doce como mel, calorosa, impecável"
+    setup: "Lari hugs Bia tightly on the sofa while Bia cries into her shoulder; Lari's face is visible above Bia."
+    setup_pt: "Lari abraça Bia com força no sofá enquanto Bia chora em seu ombro; o rosto de Lari aparece acima de Bia."
+    start_state: "Bia's face is hidden against Lari; Lari's sharp eyebrows face the camera over Bia's shoulder."
+    start_state_pt: "O rosto de Bia está escondido no ombro de Lari; as sobrancelhas afiadas de Lari encaram a câmera sobre Bia."
+    timeline:
+      - at_s: "0-2s"
+        action: "Lari whispers the cruel line straight to camera while squeezing Bia."
+        action_pt: "Lari sussurra a frase cruel diretamente para a câmera enquanto aperta Bia."
+      - at_s: "2-4s"
+        action: "Lari changes only her mouth into a comforting smile and turns to Bia."
+        action_pt: "Lari muda apenas a boca para um sorriso de consolo e se vira para Bia."
+      - at_s: "4-6s"
+        action: "Bia lifts her wet face; Lari pats her hair without breaking the pose."
+        action_pt: "Bia levanta o rosto molhado; Lari afaga seu cabelo sem quebrar a pose."
+      - at_s: "6-8s"
+        action: "Lari holds the sweet expression as the camera catches one cold eyebrow twitch."
+        action_pt: "Lari sustenta a expressão doce enquanto a câmera captura um tique frio na sobrancelha."
+    timeline_pt:
+      - at_s: "0-2s"
+        action_pt: "Lari sussurra a frase cruel diretamente para a câmera enquanto aperta Bia."
+      - at_s: "2-4s"
+        action_pt: "Lari muda apenas a boca para um sorriso de consolo e se vira para Bia."
+      - at_s: "4-6s"
+        action_pt: "Bia levanta o rosto molhado; Lari afaga seu cabelo sem quebrar a pose."
+      - at_s: "6-8s"
+        action_pt: "Lari sustenta a expressão doce enquanto a câmera captura um tique frio na sobrancelha."
+    end_state: "Bia believes the hug; Lari faces camera with a perfect smile hiding the secret."
+    end_state_pt: "Bia acredita no abraço; Lari encara a câmera com um sorriso perfeito escondendo o segredo."
+    sound: "room tone, close crying, first line is a dry whisper, second line is clean sweet dialogue"
+    sound_pt: "som do ambiente, choro próximo, primeira fala em sussurro seco, segunda fala doce e limpa"
+    must_not: "Do not let Bia hear the whisper, do not change silhouettes or clothing, no text overlays, no extra characters, no cuts."
+    must_not_pt: "Bia não pode ouvir o sussurro, não mudar silhuetas ou roupas, sem texto sobreposto, personagens extras ou cortes."
+    duration_s: 8
+    status: todo
+  - id: P04i
+    order: 6
+    kind: derived_image
+    role: cliffhanger
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: medium kitchen two-shot
+    framing_pt: plano médio de duas pessoas na cozinha
+    action: "Bia reaches for a glass while Lari's lilac phone lights on the narrow counter"
+    action_pt: "Bia alcança um copo enquanto o celular lilás de Lari acende no balcão estreito"
+    expected_result_pt: "Bia congela diante do celular lilás aceso; Lari aparece ao fundo na porta da cozinha."
+    light: "cool night practical light"
+    light_pt: "luz prática fria da noite"
+    resolution: 360p
+    parent: P03i
+    beat_pt: "A pista física que Bia procurava acende sozinha no balcão da cozinha."
+    status: approved
+    files:
+      image: assets/images/EP01_P04i_image.jpg
+  - id: P04
+    order: 7
+    kind: video_from_image
+    role: cliffhanger
+    location: apartment_living_kitchen
+    characters: [bia, lari]
+    framing: medium kitchen two-shot
+    framing_pt: plano médio de duas pessoas na cozinha
+    action: "Bia freezes at the lilac phone's anonymous notification as Lari appears in the doorway"
+    action_pt: "Bia congela diante da notificação anônima no celular lilás enquanto Lari surge na porta"
+    expected_result_pt: "Bia lê a conta anônima no celular lilás e paralisa; Lari aparece na porta sorrindo como se nada tivesse acontecido."
+    camera: "slow rack focus from the lit phone to Lari in the doorway"
+    camera_pt: "mudança lenta de foco do celular aceso para Lari na porta"
+    gaze: "Bia stares at the phone; Lari watches Bia"
+    gaze_pt: "Bia encara o celular; Lari observa Bia"
+    light: "cool night practical light"
+    light_pt: "luz prática fria da noite"
+    resolution: 360p
+    parent: P04i
+    beat_pt: "Bia confirma que a conta anônima está ligada ao celular de Lari."
+    dialogue_pt:
+      - speaker: bia
+        text: "Não pode ser... essa é a conta anônima de verdade."
+        delivery: "breathless, frightened, barely audible"
+        delivery_pt: "sem fôlego, assustada, quase inaudível"
+      - speaker: lari
+        text: "Tá procurando alguma coisa, amiga? Eu tô aqui, calma."
+        delivery: "honey-sweet, smooth, falsely casual"
+        delivery_pt: "doce como mel, lisa, falsamente casual"
+    setup: "Bia stands alone at the narrow counter with a glass; Lari's lilac phone lights beside the sink."
+    setup_pt: "Bia está sozinha junto ao balcão estreito com um copo; o celular lilás de Lari acende perto da pia."
+    start_state: "The phone notification is visible to Bia; Bia's hand stops above the glass."
+    start_state_pt: "A notificação do celular está visível para Bia; a mão de Bia para acima do copo."
+    timeline:
+      - at_s: "0-2s"
+        action: "The lilac phone lights and Bia reads the anonymous account name before speaking."
+        action_pt: "O celular lilás acende e Bia lê o nome da conta anônima antes de falar."
+      - at_s: "2-4s"
+        action: "Bia whispers the discovery and does not touch the phone."
+        action_pt: "Bia sussurra a descoberta e não toca no celular."
+      - at_s: "4-6s"
+        action: "Lari appears in the doorway, smiling with both hands visible."
+        action_pt: "Lari aparece na porta sorrindo com as duas mãos visíveis."
+      - at_s: "6-8s"
+        action: "Bia freezes; Lari tilts her head as the phone screen stays lit."
+        action_pt: "Bia paralisa; Lari inclina a cabeça enquanto a tela permanece acesa."
+    timeline_pt:
+      - at_s: "0-2s"
+        action_pt: "O celular lilás acende e Bia lê o nome da conta anônima antes de falar."
+      - at_s: "2-4s"
+        action_pt: "Bia sussurra a descoberta e não toca no celular."
+      - at_s: "4-6s"
+        action_pt: "Lari aparece na porta sorrindo com as duas mãos visíveis."
+      - at_s: "6-8s"
+        action_pt: "Bia paralisa; Lari inclina a cabeça enquanto a tela permanece acesa."
+    end_state: "Bia faces the lit phone and Lari at once; the evidence remains visible between them."
+    end_state_pt: "Bia encara o celular aceso e Lari ao mesmo tempo; a prova permanece visível entre as duas."
+    sound: "night apartment hum, single notification chime, clean breathless dialogue"
+    sound_pt: "zumbido noturno do apartamento, um toque de notificação, diálogo limpo e sem fôlego"
+    must_not: "Do not hide the anonymous notification, do not let Lari touch the phone, no new characters, no subtitles, no cuts."
+    must_not_pt: "Não esconder a notificação anônima, não deixar Lari tocar no celular, sem personagens novos, legendas ou cortes."
+    duration_s: 8
+    status: todo

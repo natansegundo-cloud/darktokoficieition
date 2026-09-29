@@ -33,6 +33,8 @@ class Character(StudioModel):
     voice_notes: str = ""
     default_delivery: str | None = None
     default_delivery_pt: str | None = None
+    voice_profile: str | None = None
+    voice_profile_pt: str | None = None
     bio_pt: str = ""
     arc_pt: str = ""
     approved_reference: str | None = None
@@ -69,6 +71,14 @@ class StylePreset(StudioModel):
     notes: str = ""
     character_rules: str = ""
     character_rules_pt: str = ""
+    audio_style: str = (
+        "clean dialogue in Brazilian Portuguese, natural room tone, no background music, "
+        "no laugh track, no on-screen text"
+    )
+    audio_style_pt: str = (
+        "áudio limpo em português do Brasil, som natural do ambiente, sem música de fundo, "
+        "sem risadas de fundo, sem texto na tela"
+    )
 
 
 class Series(StudioModel):

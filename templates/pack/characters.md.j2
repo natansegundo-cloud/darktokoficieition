@@ -1,0 +1,28 @@
+# Personagens — {{ data.series_title }} · {{ data.episode_id }}
+
+Gere e aprove os assets abaixo antes das imagens da cena. Aceite como aprovado somente um arquivo de imagem existente na pasta indicada.
+
+{% for item in data.characters %}## PERSONAGEM {{ "ABCDEFGHIJKLMNOPQRSTUVWXYZ"[loop.index0] }}: {{ item.character.name }}
+
+Quem é: {{ item.character.bio_pt or item.character.lock_block_pt or item.character.lock_block }}
+Voz: {{ item.character.voice_profile_pt or "perfil de voz pendente" }}
+
+### ROSTO
+Salvar em: `series/{{ data.series_id }}/assets/characters/{{ item.face_filename }}`
+Status: {{ item.face_status }}
+
+```text
+{{ item.face_prompt }}
+```
+
+### CORPO
+Anexar o rosto aprovado: `series/{{ data.series_id }}/assets/characters/{{ item.face_filename }}`
+Salvar em: `series/{{ data.series_id }}/assets/characters/{{ item.body_filename }}`
+Se o Flow permitir escolher o formato, use horizontal para a folha de corpo.
+Status: {{ item.body_status }}
+
+```text
+{{ item.body_prompt }}
+```
+
+{% endfor %}Lembrete: depois de aprovar, ajuste o lock_block ao que a imagem realmente mostra, incremente lock_version e registre em docs/LESSONS.md.
